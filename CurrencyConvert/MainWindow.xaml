@@ -1,0 +1,92 @@
+﻿<Window x:Class="CurrencyConvert.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CurrencyConvert" 
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="Chuyển đổi tiền tệ" 
+        SizeToContent="WidthAndHeight" 
+        MinHeight="480" 
+        MinWidth="820" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/background.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="3" Width="600" BorderBrush="{x:Null}" Grid.RowSpan="2">
+
+        </Border>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Height="50" Width="600" 
+                    VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="-40,5,161.6,5.8">
+            <Label Height="50" Width="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                   Content="Chuyển Đổi Tiền Tệ" FontSize="25" Foreground="#8077D5" FontWeight="DemiBold"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Height="80" Width="600" VerticalAlignment="Top"  Grid.RowSpan="2">
+            <Label Name="lblCurrency"  BorderBrush="{x:Null}" Content="Giá trị chuyển đổi sẽ hiện thị tại đây" Height="80" Width="600" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"  FontWeight="DemiBold" FontSize="25">
+            </Label>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.RowSpan="2">
+            <Label Name="txtCurrencyRate" Content="Tỉ giá" HorizontalContentAlignment="Center"  Width="250" Height="50" FontSize="12" Foreground="Black" FontWeight="DemiBold" VerticalContentAlignment="Center" VerticalAlignment="Bottom"></Label>
+            <Button Name="ExRate" Cursor="Hand" HorizontalContentAlignment="Center" Margin="10 0" Height="35" Width="150" Content="Cập nhập tỉ giá" Click="Rate_Click" Foreground="Black" FontWeight="DemiBold" FontSize="16" >
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="150">
+            <Label Height="40" Width="150" Content="Nhập số tiền : " Margin="50 0 0 0" HorizontalContentAlignment="Right" VerticalAlignment="Bottom" Foreground="Black" FontWeight="DemiBold" FontSize="20"></Label>
+            <Label Height="40" Width="150" Content="Chuyển đổi từ : " Margin="45 0 0 0" HorizontalContentAlignment="Right" VerticalAlignment="Bottom" Foreground="Black" FontWeight="DemiBold" FontSize="20"></Label>
+            <Label Height="40" Width="150" Content="Sang : " Margin="50 30 0 0" HorizontalContentAlignment="Right" VerticalAlignment="Bottom" Foreground="Black" FontWeight="DemiBold" FontSize="20"></Label>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Left" Height="150" Width="400" VerticalAlignment="Center" Margin="195,0,0,0">
+            <TextBox Name="txtCurrency" TextAlignment="Center" Width="350" Height="30" Margin="0 7 0 0" HorizontalContentAlignment="Left" PreviewTextInput="NumberValidationTextBox" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Top" KeyUp="txtInputKeyUp"/>
+            <ComboBox Name="cmbFromCurrency" Width="390" Height="30" Margin="0 10 0 0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Top" MaxDropDownHeight="150" SelectionChanged="CmbFromCurrency_SelectionChanged"></ComboBox>
+            <fa:ImageAwesome Icon="Exchange" Margin="0 10 0 0" Height="30" Width="30" Foreground="White" VerticalAlignment="Top"></fa:ImageAwesome>
+            <ComboBox Name="cmbToCurrency" Width="390" Height="30" Margin="0 0 0 0" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Top" MaxDropDownHeight="150" SelectionChanged="cmbToCurrency_SelectionChanged"></ComboBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Height="100" Width="600" Orientation="Horizontal">
+            <Button Name="Convert" Cursor="Hand" Height="40" Width="150" Content="Chuyển đổi" Click="Convert_Click" Margin="150 0 20 0" Foreground="Black" FontWeight="DemiBold" FontSize="20" Style="{StaticResource ButtonRound}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#8077D5" Offset="0.0" />
+                        <GradientStop Color="#8077D5" Offset="0.50" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Name="Clear" Cursor="Hand" Height="40" Width="150" Content="Làm mới/Xóa" Click="Clear_Click" Foreground="Black" FontWeight="DemiBold" FontSize="20" Style="{StaticResource ButtonRound}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#8077D5" Offset="0.0" />
+                        <GradientStop Color="#8077D5" Offset="0.50" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Width="400" Grid.RowSpan="5" Margin="0,5,0,46">
+            <Label Content="Lịch sử đổi" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="200" Height="60" FontSize="24" Foreground="#8077D5" FontWeight="DemiBold" />
+            <DataGrid x:Name="History"  Width="408" Height="380" Background="{x:Null}" Foreground="Black" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" SelectionChanged="History_SelectionChanged" AutoGenerateColumns="False" Loaded="History_Loaded" HorizontalAlignment="Right" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="fCol" IsReadOnly="True" MaxWidth="70" Header = "From" Binding="{Binding baseName}"/>
+                    <DataGridTextColumn x:Name="vCol" IsReadOnly="True" MaxWidth="80" Header = "Value" Binding="{Binding value}"/>
+                    <DataGridTextColumn x:Name="tCol" IsReadOnly="True" MaxWidth="70" Header = "To" Binding="{Binding targetName}"/>
+                    <DataGridTextColumn x:Name="rCol" IsReadOnly="True" MaxWidth="200" Header = "Result" Binding="{Binding result}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" Width="400" Margin="0,150,0,0" >
+            <Button Click="Reload_Click" Cursor="Hand" Background="{x:Null}" Margin="0 0 10 0" BorderBrush="{x:Null}" Height="40" Width="40" HorizontalAlignment="Right">
+                <fa:ImageAwesome Icon="Download"  HorizontalAlignment="Right" Height="35" Width="35" Foreground="#8077D5"></fa:ImageAwesome>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
